@@ -10,14 +10,24 @@ var compiler = webpack(config)
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }))
 app.use(webpackHotMiddleware(compiler))
 
-app.get("/", function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(__dirname + '/index.html')
+})
+
+app.get('/users', function(req, res) {
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify([{
+     userName: 'peilan'
+    },{
+      userName: 'qweqweq'
+    }])
+  );
 })
 
 app.listen(port, function(error) {
   if (error) {
     console.error(error)
   } else {
-    console.info("==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.", port, port)
+    console.info('==> 🌎  Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port)
   }
 })
