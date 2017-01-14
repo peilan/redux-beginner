@@ -21,6 +21,10 @@ module.exports = {
   ],
   module: {
     loaders: [
+      { 
+        test: /\.json$/, 
+        loader: 'json-loader'
+      },
       {
         loaders: ['react-hot', 'babel-loader'],
         include: [
@@ -37,5 +41,11 @@ module.exports = {
   },
   postcss: function () {
     return [autoprefixer, precss];
+  },
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
   }
 }

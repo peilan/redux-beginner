@@ -3,6 +3,8 @@ import {
   GET_PHOTOS_SUCCESS
 } from '../constants/Page'
 
+import {ajax} from 'jquery'
+
 export function getPhotos(year) {
 
   return (dispatch) => {
@@ -10,12 +12,17 @@ export function getPhotos(year) {
       type: GET_PHOTOS_REQUEST,
       payload: year
     })
-
-    setTimeout(() => {
+  
+    ajax({
+      type: 'get',
+      url: 'users'
+    }).then((data) => {
       dispatch({
         type: GET_PHOTOS_SUCCESS,
-        payload: [1,2,3,4,5]
+        payload: data
       })
-    }, 1000)
+    }, (error) => {
+      console.error(error)
+    })
   }
 }
